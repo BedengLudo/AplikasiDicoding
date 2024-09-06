@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Game Ludo Sederhana</title>
+    <style>
+        /* General Reset */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            line-height: 1.6;
+            background-color: #e0f7fa; /* Light cyan background */
+            color: #333;
+            text-align: center;
+        }
+
+        /* Container */
+        .container {
+            max-width: 900px;
+            margin: 20px auto;
+            padding: 20px;
+            background: #ffffff;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Board */
+        #board {
+            display: grid;
+            grid-template-columns: repeat(15, 40px); /* 15 kolom */
+            grid-template-rows: repeat(15, 40px); /* 15 baris */
+            gap: 2px;
+            margin-bottom: 20px;
+            position: relative;
+            background: #f1f1f1;
+            border: 2px solid #333;
+            border-radius: 8px;
+        }
+
+        /* Papan Ludo */
+        .cell {
+            width: 40px;
+            height: 40px;
+            background-color: #ffffff;
+            border: 1px solid #cccccc;
+        }
+
+        .start-area {
+            background-color: #ffeb3b; /* Yellow start areas */
+        }
+
+        .main-area {
+            background-color: #4CAF50; /* Green main area */
+        }
+
+        /* Tokens */
+        .token {
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            position: absolute;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+
+        .token.red { background-color: red; }
+        .token.green { background-color: green; }
+        .token.yellow { background-color: yellow; }
+        .token.blue { background-color: blue; }
+
+        /* Button */
+        #rollDice {
+            padding: 10px 20px;
+            font-size: 16px;
+            margin-top: 20px;
+            background-color: #00796b;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        #rollDice:hover {
+            background-color: #004d40;
+        }
+
+        #diceResult {
+            font-size: 18px;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Game Ludo Sederhana</h1>
+        <div id="board">
+            <!-- Membuat sel papan Ludo -->
+            <!-- 15x15 grid dengan area start dan jalur akan ditambahkan -->
+            <script>
+                // Generate the grid for the board
+                const board = document.getElementById('board');
+                for (let i = 0; i < 195; i++) {
+                    const cell = document.createElement('div');
+                    cell.className = 'cell';
+                    board.appendChild(cell);
+                }
+            </script>
+        </div>
+        <button id="rollDice">Lempar Dadu</button>
+        <p id="diceResult">Hasil Dadu: 0</p>
+    </div>
+
+    <script>
+        let currentPlayer = 'red'; // Track current player (can be 'red', 'green', 'yellow', 'blue')
+
+        document.getElementById('rollDice').addEventListener('click', function() {
+            // Generate a random number between 1 and 6
+            const diceRoll = Math.floor(Math.random() * 6) + 1;
+            document.getElementById('diceResult').innerText = `Hasil Dadu: ${diceRoll}`;
+            // Move token logic
+            moveToken(currentPlayer, diceRoll);
+            // Switch player
+            currentPlayer = getNextPlayer(currentPlayer);
+        });
+
+        // Function to move a token
+        function moveToken(color, steps) {
+            let token = document.querySelector(`.token.${color}`);
+            if (!token) return; // If the token doesn't exist, return
+
+            let currentPosition = parseInt(token.dataset.position) || 0;
+            let newPosition = currentPosition + steps;
+
+            // Example: Limit the maximum position on the board
+            if (newPosition >= 225) {
+                newPosition = 224; // Set it to the last cell if it exceeds the board
+            }
+
+            // Update token position
+            token.dataset.position = newPosition;
+            let cells = document.querySelectorAll('.cell');
+            if (cells[newPosition]) {
+                let { top, left } = cells[newPosition].getBoundingClientRect();
+                let boardRect = document.getElementById('board').getBoundingClientRect();
+                token.style.transform = `translate(${left - boardRect.left}px, ${top - boardRect.top}px)`;
+            }
+        }
+
+        function getNextPlayer(current) {
+            const players = ['red', 'green', 'yellow', 'blue'];
+            let index = players.indexOf(current);
+            return players[(index + 1) % players.length];
+        }
+
+        // Initialize tokens
+        function initTokens() {
+            const colors = ['red', 'green', 'yellow', 'blue'];
+            colors.forEach(color => {
+                for (let i = 0; i < 4; i++) { // 4 tokens per color
+                    let token = document.createElement('div');
+                    token.id = `${color}-token-${i}`;
+                    token.className = `token ${color}`;
+                    token.dataset.position = 0; // Start position
+                    document.getElementById('board').appendChild(token);
+                }
+            });
+        }
+
+        initTokens();
+    </script>
+</body>
+</html>

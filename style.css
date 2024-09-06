@@ -1,0 +1,212 @@
+/* General Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Arial', sans-serif;
+    line-height: 1.6;
+    background-color: #f4f4f4;
+    color: #333;
+}
+
+/* Header */
+header {
+    background-color: #1c6fdb;
+    color: white;
+    padding: 20px;
+    text-align: center;
+    position: relative;
+}
+
+header h1 {
+    font-size: 24px;
+    text-transform: uppercase;
+}
+
+/* Hamburger Button */
+.toggle-btn {
+    font-size: 30px;
+    background: none;
+    border: none;
+    color: white;
+    cursor: pointer;
+    position: absolute;
+    top: 20px;
+    left: 20px;
+}
+
+/* Sidebar */
+.sidebar {
+    width: 250px;
+    background-color: #2C3E50;
+    height: 100vh;
+    position: fixed;
+    left: -250px; /* Hide sidebar initially */
+    top: 0;
+    padding: 20px;
+    box-shadow: 2px 0 5px rgba(0,0,0,0.1);
+    transition: all 0.3s ease; /* Smooth transition */
+}
+
+.sidebar.open {
+    left: 0; /* Slide in sidebar */
+}
+
+.sidebar .profile {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.profile-img {
+    width: 80px;
+    border-radius: 50%;
+}
+
+.username {
+    color: white;
+    font-size: 18px;
+    margin-top: 10px;
+}
+
+.status {
+    color: lightgray;
+    font-size: 14px;
+}
+
+.status-dot {
+    height: 10px;
+    width: 10px;
+    background-color: green;
+    border-radius: 50%;
+    display: inline-block;
+}
+
+.search-bar {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 20px;
+    border-radius: 5px;
+    border: none;
+}
+
+.menu {
+    list-style-type: none;
+}
+
+.menu li {
+    margin: 10px 0;
+}
+
+.menu li a {
+    color: white;
+    text-decoration: none;
+    padding: 10px;
+    display: block;
+    background-color: #34495E;
+    border-radius: 5px;
+    transition: background-color 0.3s;
+}
+
+.menu li a:hover {
+    background-color: #1ABC9C;
+}
+
+/* Main Content */
+.main-content {
+    margin-left: 0;
+    padding: 20px;
+    transition: margin-left 0.3s ease;
+}
+
+.sidebar.open + .main-content {
+    margin-left: 260px; /* Adjust content when sidebar is open */
+}
+
+/* Main Content and Section Styling */
+.section-padding {
+    padding: 40px 0;
+}
+
+h2 {
+    font-size: 28px;
+    color: #4CAF50;
+    margin-bottom: 20px;
+}
+
+p {
+    font-size: 18px;
+    margin-bottom: 20px;
+}
+
+/* News Section */
+#news .news-item {
+    background-color: white;
+    border: 1px solid #ddd;
+    padding: 20px;
+    margin-bottom: 20px;
+    border-radius: 8px;
+    transition: box-shadow 0.3s ease;
+}
+
+#news .news-item:hover {
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+#news h3 {
+    color: #4CAF50;
+    margin-bottom: 10px;
+}
+
+/* Footer */
+footer {
+    background-color: #333;
+    color: white;
+    text-align: center;
+    padding: 15px 0;
+    position: relative;
+    bottom: 0;
+    width: 100%;
+}
+
+body {
+    background-image: url('hitam.jpg'); /* Ubah path sesuai lokasi gambar */
+    background-size: cover; /* Menyesuaikan ukuran gambar agar menutupi seluruh elemen */
+    background-position: center; /* Menempatkan gambar di tengah */
+    background-repeat: no-repeat; /* Mencegah gambar diulang */
+}
+
+/* CSS untuk header */
+header {
+    background-color: #4b4a92; /* Contoh background, sesuaikan jika perlu */
+    padding: 10px 20px; /* Padding atas/bawah dan kiri/kanan */
+}
+
+.header-container {
+    display: flex;
+    align-items: center; /* Vertikal alignment untuk logo dan teks */
+    justify-content: center; /* Horizontal alignment untuk logo dan teks */
+    gap: 15px; /* Spasi antara logo, teks, dan tombol */
+}
+
+.logo {
+    width: 50px; /* Ukuran gambar, sesuaikan sesuai kebutuhan */
+    height: auto; /* Menjaga proporsi gambar */
+}
+
+h1 {
+    margin: 0; /* Menghilangkan margin default pada h1 */
+    color: white; /* Warna teks, sesuaikan jika perlu */
+}
+
+.toggle-btn {
+    background: none;
+    border: none;
+    font-size: 24px;
+    cursor: pointer;
+    color: white;
+}
+
+/* CSS untuk sidebar dan konten lainnya */
